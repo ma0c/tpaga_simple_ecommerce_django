@@ -1,0 +1,62 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<!--
+	Eventually by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		{% block static-css %}
+            <link rel="stylesheet" href="{% static 'css/main.css'%}" />
+            <link rel="stylesheet" href="{% static 'css/topbar.css' %}" />
+            <link rel="stylesheet" href="{% static 'css/alerts.css' %}" />
+		{% endblock static-css %}
+		{% block specific-css %}
+		
+		{% endblock specific-css %}
+			
+	</head>
+	<body class="is-preload">
+
+		<!-- Topbar -->
+		{% block topbar %}
+		<div class="topbar">
+            {% if user.is_authenticated %}
+                <a href="{% url "log_out" %}">Log out</a>
+            {% else %}
+			    <a href="{% url "log_in" %}">Log in</a>
+        {% endif %}
+		</div>
+		{% endblock topbar %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.level_tag }}">
+                    <input type="checkbox" id="alert-{{ forloop.counter }}"/>
+                    <label class="close" title="close" for="alert-{{ forloop.counter }}">
+                      X
+                    </label>
+                        <p class="inner">
+                            <strong>{{ message.level_tag|upper }}!</strong> {{ message }}
+                        </p>
+                </div>
+            {% endfor %}
+        {% endif %}
+		
+		{% block content %}
+		
+		{% endblock content %}
+		
+		<!-- Scripts -->
+		{% block static-js %}
+			<script src="{% static 'js/main.js' %}"></script>
+		{% endblock static-js %}
+			
+		{% block specific-js %}
+		
+		{% endblock specific-js %}
+	</body>
+</html>

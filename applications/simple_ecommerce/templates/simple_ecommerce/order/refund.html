@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <h1>
+        {% trans 'Refund' %}
+    </h1>
+    <p>
+        {% trans 'Trying to redund order' %}
+        <a href="{% url detail_url_name order.slug %}">{{ order.slug }}</a>
+    </p>
+    <form method="POST">
+        {% csrf_token %}
+
+        <button>
+            {% trans 'Refund' %}
+        </button>
+    </form>
+    <a href="javascript:window.history.back();">
+            <button class="btn btn-default">
+                    {% trans 'Back' %}
+            </button>
+        </a>
+{% endblock %}

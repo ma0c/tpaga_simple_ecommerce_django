@@ -1,0 +1,11 @@
+.idea
+
+db.sqlite3
+
+python_simple_class_generator.py
+
+secrets.sh
+
+ngrok
+
+ci_configuration.sh

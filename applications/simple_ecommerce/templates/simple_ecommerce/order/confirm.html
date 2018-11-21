@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load humanize %}
+{% block content %}
+    <div class="row">
+        <h1>
+            {% trans 'Confirm' %}
+        </h1>
+    </div>
+    <div class="row">
+        <h2>
+            {% trans 'Payment status: ' %} {{ order.status }}
+        </h2>
+
+        <h3>
+            {% trans 'Summary' %}
+        </h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        {% trans 'Item' %}
+                    </th>
+                    <th>
+                        {% trans 'Quantity' %}
+                    </th>
+                    <th>
+                        {% trans 'Value' %}
+                    </th>
+                    <th>
+                        {% trans 'Total' %}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.orderitem_set.all %}
+                    <tr>
+                        <td>
+                            {{ item.item.name }}
+                        </td>
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+                        <td>
+                            {{ item.item.value|floatformat:0|intcomma }}
+                        </td>
+                        <td>
+                            {{ item.total_value|floatformat:0|intcomma }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3">
+                        <strong>
+                            {% trans 'Total' %}
+                        </strong>
+                    </td>
+                    <td>
+                        {{ order.total_value|floatformat:0|intcomma }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

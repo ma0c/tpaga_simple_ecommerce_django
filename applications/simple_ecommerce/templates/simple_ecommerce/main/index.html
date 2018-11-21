@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load humanize %}
+{% block title %}
+    Random E-Commerce
+{% endblock %}
+{% block topbar %}
+		<div class="topbar">
+            {% if user.is_authenticated %}
+                {% if perms.dispatch.add_dispatcher %}
+                    <a href="{% url 'ORDER_list' %}">{% trans 'Operator' %}</a>
+                {% endif %}
+                <a href="{% url "log_out" %}">Log out</a>
+
+            {% else %}
+			    <a href="{% url "log_in" %}">Log in</a>
+        {% endif %}
+		</div>
+		{% endblock topbar %}
+{% block content %}
+    <h1>
+        {% trans 'Welcome to your random ecommerce' %}
+    </h1>
+    <form method="POST">
+        {% csrf_token %}
+        {% for input in form %}
+            {% if input.name == "item" %}
+                <div>
+
+                    {% trans 'Your random product for today purchase is:' %}
+                    <strong>
+                        {{ random_item.name }}
+                    </strong>
+                </div>
+                <div>
+
+                    {% trans 'Value each:' %}
+                    <strong>
+                        {{ random_item.value|floatformat:0|intcomma }}
+                    </strong>
+                </div>
+
+                {{ input }}
+            {% else %}
+                <div class="row">
+
+                <label for="{{ input.name }}">
+                {{ input.label }}
+                </label>
+
+                {{ input }}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="row">
+            <button>
+                {% trans 'Place order' %}
+            </button>
+        </div>
+    </form>
+{% endblock %}
