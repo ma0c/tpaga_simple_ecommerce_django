@@ -91,7 +91,7 @@ setup.setup()
 Now execute the development server using environment variables to connect with TPaga
 
 ```bash
-TPAGA_USERNAME="your_tpaga_miniapp_username" TPAGA_PASSWORD="your_tpaga_miniapp_password" python manage.py runserver
+DEBUG=True TPAGA_USERNAME="your_tpaga_miniapp_username" TPAGA_PASSWORD="your_tpaga_miniapp_password" python manage.py runserver
 ```
 
 ```bash

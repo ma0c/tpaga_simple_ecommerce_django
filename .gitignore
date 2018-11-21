@@ -9,3 +9,5 @@ secrets.sh
 ngrok
 
 ci_configuration.sh
+
+tpaga_simple_ecommerce_django_env
